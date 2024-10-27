@@ -14,7 +14,7 @@ type DefaultAddressFetcher struct{}
 func (f *DefaultAddressFetcher) FetchAddressFromServicoA(cep string) (entity.ServicoAddress, error) {
 	//time.Sleep(2 * time.Second)
 	var address entity.ServicoAddress
-	resp, err := http.Get(fmt.Sprintf("http://localhost:8081/address/%s", cep))
+	resp, err := http.Get(fmt.Sprintf("http://servico_a:8085/address/%s", cep))
 	if err != nil {
 		return address, err
 	}

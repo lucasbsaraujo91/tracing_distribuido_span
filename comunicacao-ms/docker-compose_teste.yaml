@@ -19,8 +19,6 @@ services:
       - ./.docker/prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
-    networks:
-      - comunicacao-ms_my_network
 
   otel-collector:
     container_name: otel-collector
@@ -46,7 +44,7 @@ services:
       - prometheus
     networks:
       - comunicacao-ms_my_network
-
+  
 
 networks:
   comunicacao-ms_my_network:

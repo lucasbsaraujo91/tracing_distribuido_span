@@ -21,7 +21,7 @@ import (
 // Inicialização do OpenTelemetry
 func initOpenTelemetry() (*trace.TracerProvider, error) {
 	ctx := context.Background()
-	exporter, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint("172.23.0.2:4317"), otlptracegrpc.WithInsecure())
+	exporter, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint("otelcollector:4317"), otlptracegrpc.WithInsecure())
 	if err != nil {
 		return nil, fmt.Errorf("erro ao criar o exportador OTLP: %w", err)
 	}
@@ -56,8 +56,8 @@ func main() {
 	r.Get("/address/{cep}", AddressHandler(fetcher))
 
 	// Inicia o servidor
-	log.Println("Servidor rodando na porta 8081")
-	http.ListenAndServe(":8081", r)
+	log.Println("Servidor rodando na porta 8085")
+	http.ListenAndServe(":8085", r)
 }
 
 // Handler para tratar as requisições de endereço

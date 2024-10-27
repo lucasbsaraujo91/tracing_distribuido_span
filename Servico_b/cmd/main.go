@@ -23,7 +23,7 @@ import (
 func main() {
 	// Configuração do exportador OTLP
 	ctx := context.Background()
-	exporter, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint("172.23.0.2:4317"), otlptracegrpc.WithInsecure())
+	exporter, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint("otelcollector:4317"), otlptracegrpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Erro ao criar o exportador OTLP: %v", err)
 	}
@@ -61,7 +61,7 @@ func main() {
 		handleWeatherByZipCode(ctx, w, zipCode, weatherUseCase)
 	})
 
-	log.Fatal(http.ListenAndServe(":8082", r))
+	log.Fatal(http.ListenAndServe(":8086", r))
 }
 
 func handleWeatherByZipCode(ctx context.Context, w http.ResponseWriter, zipCode string, weatherUseCase *usecase.WeatherUseCase) {
